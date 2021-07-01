@@ -33,6 +33,9 @@
 
     <h2>Product details</h2>
 
+    <a href="./fontOffice.html?id="></a>
+
+
     <div class="product-details">
       <!--       
       <div class="col mt-5">
@@ -70,7 +73,14 @@
 
     const productDetails = document.querySelector(".product-details");
 
+
+
+
+
     window.onload = async () => {
+
+
+
       try {
         const response = await fetch(url + entPoint, {
           headers: {
@@ -82,37 +92,39 @@
         if (response.ok) {
 
           const data = await response.json()
+          const html = `
 
-          console.log(data);
+            <div class="col delate mt-5 '">
+            <div class="card" style="width: 18rem;">
+              <img src="${data.imageUrl}" class="card-img-top " alt="...">
+              <div class="card-body">
+                <h5 class="card-title"> ${data.name}</h5>
+                <p class="card-text">${data._id}</p>
+                <p class="card-text">${data.price} €</p>
+                <p class="card-text">${data.brand}</p>
+                <button class="bt btn btn-success" type="button">Edit</button>
 
+              </div>
+            </div>
+          </div>
 
+            `;
 
-
-
-          //           const html = `
-
-          //   <div class="col delate mt-5 data-id='${product._id}'">
-          //   <div class="card" style="width: 18rem;">
-          //     <div class="card-body">
-          //       <h5 class="card-title"> ${product.name}</h5>
-          //       <p class="card-text">${product.description}</p>
-          //       <p class="card-text">${product.price} €</p>
-          //       <p class="card-text">${product.brand}</p>
-          //       <a href="./detail.html?productId=${product._id} " class="btn btn-primary">Buy It Now </a>
-
-          //     </div>
-          //   </div>
-          // </div>
-
-          //   `;
-          //           row.insertAdjacentHTML("afterbegin", html);
+          productDetails.insertAdjacentHTML("afterbegin", html);
         }
 
-        // if (reponse.ok) {
-        //   // console.log(true);
-        // }
 
-        // console.log(response);
+        const btn = document.querySelector('.bt')
+
+        btn.addEventListener('click', (e) => {
+          e.preventDefault()
+          window.location.assign('./backOffice.html?id=' + entPoint)
+
+
+        })
+
+
+
       } catch (error) {
         console.error(error);
       }
